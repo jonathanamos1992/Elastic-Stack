@@ -38,7 +38,7 @@ Delete
 Port 9200
 Elasticsearch provides a REST API that allows you to commuinicate with your cluster
 
-When you send requests to Elasticsearch, you're sending an HTTP REQUEST to this REST API
+When you send requests to Elasticsearch, you're sending an HTTP REQUEST to this REST API whose endpoint is localhost on port 9200 {127.0.0.1:9200}
 
 <img width="753" height="1513" alt="image" src="https://github.com/user-attachments/assets/3284a433-60e9-41a6-ad32-1805215b6f40" />
 
