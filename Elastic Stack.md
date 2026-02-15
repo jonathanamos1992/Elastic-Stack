@@ -42,6 +42,45 @@ When you send requests to Elasticsearch, you're sending an HTTP REQUEST to this 
 
 <img width="753" height="1513" alt="image" src="https://github.com/user-attachments/assets/3284a433-60e9-41a6-ad32-1805215b6f40" />
 
+## Kibana
+
+We see that the local host is running on port 5601
+
+copy & paste to browser
+
+<img width="1104" height="130" alt="image" src="https://github.com/user-attachments/assets/511b8d9e-9931-4a05-8aca-b311bb90c04e" />
+
+#### Kibana is a web interface for Elasticsearch. Kibana ships with its backend server that communicates with Elasticsearch.
+
+When you start up a node, cluste rins formed automatically.
+
+Best practice is to name cluster and node to something that is meaningful.
+Reason is that as apps get bigger, may be working with multiple clusters with multiple nodes that are responsible for different things
+
+### Kibana GUI 
+https://www.elastic.co/guide/en/elasticsrarch/reference/current/rest-apis.html
+
+<img width="2144" height="1118" alt="image" src="https://github.com/user-attachments/assets/d2997a37-658f-482f-a471-db755dc69078" />
+
+<img width="802" height="409" alt="image" src="https://github.com/user-attachments/assets/2f9ff607-63be-4786-a07e-0d3de6787576" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
