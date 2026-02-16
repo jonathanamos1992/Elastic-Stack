@@ -200,6 +200,73 @@ and then pivot by status code visually
 
 <img width="470" height="441" alt="image" src="https://github.com/user-attachments/assets/c9c36bf5-ef6f-4bb9-9268-e4293f01db2e" />
 
+### Example Hunt
+
+Found a suspected malicious hash
+
+ran it as a query
+<img width="2014" height="121" alt="image" src="https://github.com/user-attachments/assets/27840cfc-488d-4aea-b634-49a421575bef" />
+
+Filtered on hostname and file hash
+File executed onto a box and we can see if anyone else had this file execute 
+
+<img width="2024" height="932" alt="image" src="https://github.com/user-attachments/assets/2d35ff7d-2f0d-4e24-bddd-dd4e8ef5da06" />
+
+ ### Next we changed to winlogbeat
+Want to look at any files that were created 
+
+We found that suspected malicious files were created inside of "C:\Users\packetpub\AppData\Roaming" and combined that with event.type:creation
+Will show any files created in that directory
+<img width="881" height="100" alt="image" src="https://github.com/user-attachments/assets/31210e8e-4081-4cfc-856f-7e682021ffe9" />
+
+<img width="2030" height="946" alt="image" src="https://github.com/user-attachments/assets/262a5844-00d7-4be4-b306-cd27eabdf56e" />
+
+From here we can add addtional information as columns to see what was created.
+
+host.hostname
+file.directory
+file.name
+event.type
+
+We can add much more information if we wanted via flyout
+
+<img width="2026" height="626" alt="image" src="https://github.com/user-attachments/assets/4092a491-ffe7-4016-806a-4b23346be2a0" />
+
+### Next we went back to the Logs index pattern
+
+Created a filter to look at network data and endpoint data
+
+event.category: network
+process.executable is 
+
+<img width="780" height="427" alt="image" src="https://github.com/user-attachments/assets/a2c6bf69-e5bc-4082-840c-8ea16dd364c1" />
+
+Need endpoint data to do this
+
+In the demo we just wanted the suspicious file that was created
+<img width="628" height="245" alt="image" src="https://github.com/user-attachments/assets/29296775-8d51-4f6c-9942-2b7e41236b71" />
+
+
+We also added dns.answers.data & dns.question.name and could search for either of these
+
+<img width="2062" height="831" alt="image" src="https://github.com/user-attachments/assets/c2deba9d-bb3b-4ba2-a91c-c51441b3f699" />
+
+then we added process.executable to see which process we're tracking
+<img width="2026" height="873" alt="image" src="https://github.com/user-attachments/assets/494fc7a1-d44b-41e8-9874-846c9c4b10aa" />
+
+
+As well as destination.port
+<img width="2019" height="907" alt="image" src="https://github.com/user-attachments/assets/41b65894-01d4-417f-8377-26fe9565b2d1" />
+
+From here we see traffic going to destination port 587
+
+so we filtered on event.category:network and also filtered on process.executable: and added a destination port column and saw that it is reaching out to port 587 which is suspicious because it is not a mail client
+
+<img width="681" height="543" alt="image" src="https://github.com/user-attachments/assets/444e7a27-ff60-4dd1-87cf-d33ec0702134" />
+
+<img width="696" height="729" alt="image" src="https://github.com/user-attachments/assets/b5fd3981-a3d5-40c2-9e44-2e5be8af3f35" />
+
+<img width="639" height="251" alt="image" src="https://github.com/user-attachments/assets/d75fc54b-feed-49cd-8e92-c20bdae15fbf" />
 
 
 
