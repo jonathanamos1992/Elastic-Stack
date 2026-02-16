@@ -176,16 +176,29 @@ or
 
 ### http.response.status_phrase : ok
 
+## Hunt for Partial HTTP responses
+A lot of suspicious activity can live in:
+
+206 → partial downloads (chunked payloads, staged exfil, resumable transfers)
+304 → caching tricks
+302/301 → redirects used in phishing chains
+
+### network.protocol:http AND http.response.status_code >= 200 AND http.response.status_code < 300
+
+or 
+
+### network.protocol:http
+
+and then pivot by status code visually
 
 
+### Discover
 
+<img width="505" height="161" alt="image" src="https://github.com/user-attachments/assets/2df5f7db-0f13-4261-8204-c0b2ca8a5f16" />
 
+<img width="469" height="438" alt="image" src="https://github.com/user-attachments/assets/d943e39e-581c-4d76-9a3e-f78b4f8b485c" />
 
-
-
-
-
-
+<img width="470" height="441" alt="image" src="https://github.com/user-attachments/assets/c9c36bf5-ef6f-4bb9-9268-e4293f01db2e" />
 
 
 
