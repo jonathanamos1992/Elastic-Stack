@@ -64,12 +64,15 @@ https://www.elastic.co/guide/en/elasticsrarch/reference/current/rest-apis.html
 
 <img width="802" height="409" alt="image" src="https://github.com/user-attachments/assets/2f9ff607-63be-4786-a07e-0d3de6787576" />
 
+Observability
+Use beats to store data and represent data about uptime and how different platforms are behaving and different metrics, how users are interacting (click throughs, how much time peoople are spending on pages.)
 
+Security
+OVerview page that shows different alerts from internal and external, different type of events, host events can send auditbeat ,elastic endpoint, filebeat and winlogbeat
 
+## Other KQL Queries
 
-
-
-
+http.response.status_phrase : ok
 
 
 
