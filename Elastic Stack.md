@@ -268,6 +268,38 @@ so we filtered on event.category:network and also filtered on process.executable
 
 <img width="639" height="251" alt="image" src="https://github.com/user-attachments/assets/d75fc54b-feed-49cd-8e92-c20bdae15fbf" />
 
+From here the demo went over to Packetbeat index and filtered for destination.port:587
+
+amd added a host.hostname column
+Saw the destination ip for a document was the same ip as before so we added it as a column
+
+In the next query, we narrowed our search even further using wildcards where filenames may have changed but still in the known directories from the intial file objects when we 
+saw they were created
+
+NArrowed down to 7 hits
+<img width="1642" height="157" alt="image" src="https://github.com/user-attachments/assets/9b051c52-b76c-4613-bb01-c6baf2cee79a" />
+
+We filtered on host.hostname to verify this only happened on one machine.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
