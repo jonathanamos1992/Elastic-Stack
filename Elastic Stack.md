@@ -68,12 +68,113 @@ Observability
 Use beats to store data and represent data about uptime and how different platforms are behaving and different metrics, how users are interacting (click throughs, how much time peoople are spending on pages.)
 
 Security
-OVerview page that shows different alerts from internal and external, different type of events, host events can send auditbeat ,elastic endpoint, filebeat and winlogbeat
+Overview page that shows different alerts from internal and external, different type of events, host events can send auditbeat ,elastic endpoint, filebeat and winlogbeat
+
+## KQL Queries
+
+Baseline hunting filter (clean starting point)
+Start with:
+
+### event.kind:event
+
+Security Onion sends lots of:
+metrics
+internal service logs
+enrichment data
+
+Removes:
+metrics
+pipeline/system logs
+enrichment artifacts
+
+Then add:
+
+### event.category:network OR event.category:process OR event.category:file
+
+Why?
+
+These are usually the most valuable behavior categories:
+network = connections, DNS, HTTP
+process = execution activity
+file = creation/modification
+
+This already cuts a lot of noise.
+
+## Network-only baseline
+
+### event.kind:event AND event.category:network AND event.type:connection
+
+What this gives you:
+
+Clean Zeek-style network telemetry
+Removes Suricata alerts and SOC service logs
+Easier pivoting by protocol
+
+## Then pivot into specific protocols
+
+Now you can layer on things like:
+
+## DNS hunting
+###network.protocol:dns
+
+## HTTP hunting
+### network.protocol:http
+
+## TLS hunting
+###network.protocol:tls
+
+Notice:
+👉 Protocol filters come last, not first.
+
+Your Discover view contains mixed datasets:
+
+soc (system logs)
+zeek.*
+suricata.*
+endpoint.*
+
+Starting with event.kind:event prevents you from accidentally hunting through SOC internal logs — which is exactly what you were seeing earlier.
+
+
+## Add this field as a column in Discover:
+### data_stream.dataset
+
+When you hunt you’ll instantly see:
+
+zeek.dns
+zeek.conn
+suricata.alert
+soc
+
+### NOT data_stream.dataset:soc
+
+What disappears:
+Security Onion system logs
+sensoroni logs
+internal services
+agent lifecycle noise
+
+### agent.type:(filebeat OR elastic-agent OR packetbeat)
+This limits results to real collectors.
+
+Put them together (baseline clean view)
+
+Try this:
+
+### event.kind:event AND NOT data_stream.dataset:soc AND event.category:network
+
+Then pivot with:
+
+### network.protocol:dns
+
+or
+
+### network.protocol:http
+
 
 ## Other KQL Queries
 
-http.response.status_phrase : ok
-
+### http.response.status_phrase : ok
 
 
 
