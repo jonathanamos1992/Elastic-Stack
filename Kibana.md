@@ -309,13 +309,21 @@ Now we see the timing is roughtly consistent, the source parts change and the ht
 
 <img width="692" height="336" alt="image" src="https://github.com/user-attachments/assets/9ec9bbe2-cffa-4017-86ef-10ac341660b8" />
 
+## To find out where our host went we pivot from our infected host outward to see suspicious destinations
 
+Start from victim IP and look at all external domains it talks to, and then rank them by weirdness.
 
+<img width="772" height="85" alt="image" src="https://github.com/user-attachments/assets/bc8f53f7-eade-49ff-b5d5-cffdf92dff20" />
 
+<img width="699" height="376" alt="image" src="https://github.com/user-attachments/assets/4d94b0db-8a7f-4ca0-b5eb-13c4ab87d5a1" />
+<img width="2768" height="717" alt="image" src="https://github.com/user-attachments/assets/1f347ab0-a273-46b6-b371-e5fd7dca2739" />
 
+So we filtered on the suspicious website (we got the answer from Malware Traffic Analysis)
+But we see there's traffic right at the beginning of where we began to see suspicious POST requests.
 
+it's also going to a different IP address
 
-
+<img width="749" height="600" alt="image" src="https://github.com/user-attachments/assets/03dcdcaa-d6e7-461a-968f-e428c4c65d85" />
 
 
 
