@@ -291,14 +291,23 @@ That combo is a strong automated beacon/check-in pattern
 
 <img width="657" height="93" alt="image" src="https://github.com/user-attachments/assets/32d06fe3-8735-4c1b-ba78-5a01bea1bd35" />
 
+<img width="725" height="218" alt="image" src="https://github.com/user-attachments/assets/a18c76a2-31a3-4f8d-80de-c6a707a05d08" />
 
+<img width="670" height="427" alt="image" src="https://github.com/user-attachments/assets/c567955e-fd8e-4bcd-8145-b3522bc6cb12" />
 
+<img width="660" height="346" alt="image" src="https://github.com/user-attachments/assets/9a054fb2-3e69-474b-93b6-64c48e0b57c9" />
 
+Now we see the timing is roughtly consistent, the source parts change and the http.request.body.length is consistent which let's us know this is most likely automated behavior.
 
+<img width="685" height="514" alt="image" src="https://github.com/user-attachments/assets/2d22a850-c5f7-4ad3-8c77-b4832b70b820" />
 
+<img width="765" height="366" alt="image" src="https://github.com/user-attachments/assets/cb6cc403-86d3-47bd-93c4-ae77612ad3bf" />
 
+<img width="2768" height="409" alt="Screenshot 2026-02-17 141334" src="https://github.com/user-attachments/assets/03593bca-c024-4257-aa09-8254a049996d" />
 
+### The next step is to connect the behavior to the alert story
 
+<img width="692" height="336" alt="image" src="https://github.com/user-attachments/assets/9ec9bbe2-cffa-4017-86ef-10ac341660b8" />
 
 
 
