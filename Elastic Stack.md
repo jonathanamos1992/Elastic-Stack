@@ -77,6 +77,10 @@ Start with:
 
 ### event.kind:event
 
+or
+
+### event.category:network
+
 Security Onion sends lots of:
 metrics
 internal service logs
