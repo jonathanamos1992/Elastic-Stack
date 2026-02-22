@@ -30,6 +30,11 @@ So we removed the network.protocol tag
 Now we can see data
 <img width="3156" height="942" alt="image" src="https://github.com/user-attachments/assets/2f981165-89f6-4a86-93e2-231eee2171bf" />
 
+### Question
+Why does "event.dataset:zeek" not return results but "event.dataset:zeek.http" does?
+<img width="687" height="854" alt="image" src="https://github.com/user-attachments/assets/b00680c8-1e99-45d0-b000-8369dd23b896" />
+##########################################
+
 Next we looked at http and took a look at what websites we being visited at the http.virtual_host 
 <img width="1197" height="927" alt="image" src="https://github.com/user-attachments/assets/002cb1e2-8686-49a1-bb38-e4cd9753c92a" />
 
