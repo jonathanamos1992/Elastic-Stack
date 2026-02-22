@@ -10,8 +10,10 @@
 
 ### We know our suspected ip is 10.8.15.133
 So we focus on that as a source.ip and destination.ip
-
 <img width="3152" height="245" alt="image" src="https://github.com/user-attachments/assets/070e2441-f9fe-4120-8276-94d7b45b4f30" />
+
+
+### Let's check out what network protocols are being used.
 
 <img width="864" height="976" alt="image" src="https://github.com/user-attachments/assets/a98d6247-0f5b-4d4b-a1cc-e6010b70f6f0" />
 
