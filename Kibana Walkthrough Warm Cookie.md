@@ -79,33 +79,112 @@ Maybe I could've crossed checked this with the earlier HTTP.VIRTUAL_HOST and tho
 
 <img width="843" height="1315" alt="image" src="https://github.com/user-attachments/assets/aa84ea2f-7d4b-4fea-926d-6ffa5b06411e" />
 
+### We were attempting to understand the sequence of events 
 
+1. Initial Infection
+2. Payload Delivery
+3. C2 Behavior
 
+I had the question of if I see a document in Kibana, say the GET request for /data/0f60a3e from the 72.5.43.29 and before that is the GET request for /management?16553a25.. from the webiste "quite.checkfedexexp.com", how do I know which one triggered the alert in Security Onion with the malicious MZ executable.
 
+ChatGPT told us to not identify the executable by guessing the URI name, but by lining up the timing + server + behavior
 
+So in Security Onion we see the MZ alert and note 3 things:
 
+src_ip (who sent the file) = 72.5.43.29
+dest_ip (victim) = 10.8.15.133
+@timestamp (when) = 2024-08-15 00:12💯
 
+Then we go to Zeek HTTP logs (event.dataset:zeek.http) and search with:
 
+Then we'll zoom in on our time range to just around the alert time.
+Find Zeek entries that involve the smae server IP
+-Look for http.virtual_host:72.5.43.29 (or destination IP showing 72.5.43.29)
 
+Look for the HEAD then GET pattern from near that time:
 
+That pattern strongly suggests: "check file" -> download file"
 
+Confirm it's the likely binary transfer by adding/looking at these fields in Zeek
 
+http.response.body.length (large-ish is more file-like)
+http.resp_mime_types (sometimes shows application/*)
+http.status_code (200 is common for successful download)
 
+<img width="2475" height="936" alt="image" src="https://github.com/user-attachments/assets/74dd22e4-3f5d-4106-82b8-f095e36ee870" />
 
+Now separate the the earlier state (lure site/initial infection)
 
+Requests to quote.checkfedex.com with /managements? are more "webpage-ish" (parameters, long query strings). That's why we treat it as delivery/lure, not the exe itself
 
+Had to change our time in Kibana from browser to UTC
+<img width="3381" height="1087" alt="image" src="https://github.com/user-attachments/assets/50ec596d-0319-4793-a015-44e0141249bb" />
 
+<img width="2256" he<img width="3036" height="278" alt="image" src="https://github.com/user-attachments/assets/b620bb89-5842-429c-9070-c82feb44a0d4" />
+ight="289" alt="image" src="https://github.com/user-attachments/assets/ee3a29e3-bef3-4bf7-af90-73f63cc9bb82" />
 
+So looking at these alerts, 2024-08-15 00:12:00 is 7 hours ahead our alerts in Kibaba 2024-08-14 17:11:59 
 
+So if our Sec Onion alerts shows a timestamp of ~17:12 on 2024-08-14 we can look at Kibana and see a GET request that received a response of 159.232 bytes, which most likely triggered the Sec Onion alert
 
+<img width="3034" height="531" alt="image" src="https://github.com/user-attachments/assets/b53931c9-3062-4d4f-bb3e-745bac649784" />
 
+<img width="2371" height="373" alt="image" src="https://github.com/user-attachments/assets/9f036f56-7032-4fc2-8db9-c7d4f2937a64" />
 
+ChatGPT told us that the /managements?16553 with all it's parameters is indicative of a webpage but I wanted to know what to look for to be sure so we can add the filter "file.resp.mime.types" as a column and we see it says it's a zip file, which is common in malware delivery
 
+We also see that the /data/ executable payload we narrowed down earlier says it's x-dosexec
 
+Sequence of Events:
 
+quote.checkfedexexp.com  → delivers ZIP (initial payload container)
+72.5.43.29 /data/...     → delivers EXE (actual malware)
 
+Now we can verify beaconing behavior and isolate only the suspected C2 traffic
 
+We can remove the lure stage and show only post-infection traffic
 
+<img width="1539" height="127" alt="image" src="https://github.com/user-attachments/assets/ff74b1b0-8c4d-4751-8b6f-50efd4ce2757" />
+
+Next we look for the beaconing patterns
+
+<img width="687" height="222" alt="image" src="https://github.com/user-attachments/assets/b73fea69-bc91-4f56-b7c9-5f5727f2c9f8" />
+
+Which we have already
+
+<img width="2350" height="567" alt="image" src="https://github.com/user-attachments/assets/9c65e46e-5f2e-4898-8d96-ad85da57b19a" />
+
+<img width="699" height="657" alt="image" src="https://github.com/user-attachments/assets/ab590f6a-a63d-4b72-b525-3a331cf8aa56" />
+
+<img width="2695" height="469" alt="image" src="https://github.com/user-attachments/assets/b13d364f-635d-4a83-bf39-751501238672" />
+
+The chart is showing number of HTTP events over time
+
+*Doesn't care what kind they are, just counting requests"
+
+<img width="600" height="202" alt="image" src="https://github.com/user-attachments/assets/4c8ce940-e17c-453d-9606-0ea5ef2d52b5" />
+
+### To verify infection was limited to only one host
+
+Temporarily remove the KQL query for 10.8.15.133
+
+Search for only malicious ip
+
+<img width="2135" height="855" alt="image" src="https://github.com/user-attachments/assets/c47496ac-41fc-483a-bc66-a512d3e84273" />
+
+Then group by source.ip
+
+<img width="889" height="743" alt="image" src="https://github.com/user-attachments/assets/ab158c4a-10c2-4263-97a0-3f74dfe1eb76" />
+
+We only see the 10.8.15.133
+
+Double Checking Suricata Alerts
+
+event.dataset:suricata.alert AND 72.5.43.29
+
+<img width="2489" height="981" alt="image" src="https://github.com/user-attachments/assets/ee12b404-d651-4622-b030-0e0219da4d01" />
+
+Add source ip column and we should only see the internal ip 10.8.15.133
 
 
 
