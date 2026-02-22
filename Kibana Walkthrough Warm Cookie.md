@@ -20,7 +20,7 @@ So we focus on that as a source.ip and destination.ip
 We see that HTTP has the most traffic
 Next we'll filter to view only HTTP traffic from the infected host
 
-Because we we filtered on "network.protocol:http" we were not able to see fields like http.uri or http.method becasue those are coming from Zeek datasets and our current search was searching suricata flow records.
+Because we we filtered on "network.protocol:http" we were not able to see fields like http.uri or http.method because those are coming from Zeek datasets and our current search was searching suricata flow records.
 
 <img width="670" height="854" alt="image" src="https://github.com/user-attachments/assets/ccbef79a-eef1-4302-a9b8-d84c78b67aea" />
 
