@@ -1,3 +1,13 @@
+# ALERTS
+
+<img width="2248" height="488" alt="image" src="https://github.com/user-attachments/assets/cb87a897-1f0d-44fa-b7b3-4c2e4eb2dda3" />
+
+<img width="681" height="665" alt="image" src="https://github.com/user-attachments/assets/d8be2c88-c42e-4a2f-8936-b3a96af2fbb1" />
+<img width="2260" height="477" alt="image" src="https://github.com/user-attachments/assets/41bd59f5-4363-45dd-aab6-ff4de7c50277" />
+<img width="700" height="730" alt="image" src="https://github.com/user-attachments/assets/70431a4a-9ef9-4c3f-8b4d-6c0df3279fc4" />
+
+<img width="711" height="238" alt="image" src="https://github.com/user-attachments/assets/ffefbf73-8c38-4459-91ba-d829078847bd" />
+
 We know our suspected ip is 10.8.15.133
 So we focus on that as a source.ip and destination.ip
 
