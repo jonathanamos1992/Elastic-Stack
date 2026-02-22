@@ -23,6 +23,8 @@ Next we'll filter to view only HTTP traffic from the infected host
 Because we we filtered on "network.protocol:http" we were not able to see fields like http.uri or http.method because those are coming from Zeek datasets and our current search was searching suricata flow records.
 
 <img width="670" height="854" alt="image" src="https://github.com/user-attachments/assets/ccbef79a-eef1-4302-a9b8-d84c78b67aea" />
+<img width="659" height="515" alt="image" src="https://github.com/user-attachments/assets/36362a3b-3fda-4fa1-aa39-2b6cbb98c8f4" />
+
 
 So we removed the network.protocol tag
 Now we can see data
